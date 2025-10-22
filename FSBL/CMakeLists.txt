@@ -36,6 +36,18 @@ project(${CMAKE_PROJECT_NAME})
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME})
 
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} ARGS -O binary ${CMAKE_PROJECT_NAME}.elf ${CMAKE_PROJECT_NAME}.bin
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build
+    COMMENT "Converting to binary"
+)
+
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} ARGS -O ihex ${CMAKE_PROJECT_NAME}.elf ${CMAKE_PROJECT_NAME}.hex
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build
+    COMMENT "Converting to hex"
+)
+
 # Include mx-generated
 include("mx-generated.cmake")
 
