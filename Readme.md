@@ -2,15 +2,16 @@
 This is a simple repo that was created from a CubeMX project for the STM32N657X0 microcontroller. A cmake build project was exported and then a devcontainer and associated docker environment were added. The CubeMX project was setup to support Secure, NonSecure and FSBL build targets. The external memory context was not selected for this project.
 
 ## Goals
-Initial [Done]:
-1. Create a cmake project that can build for the STM32N6 from command line and within vscode
+Initial:
+1. [Done] Create a cmake project that can build for the STM32N6 from command line and within vscode
     - This is to allow for easier development and inclusion of libraries without being limited by the Eclipse CDT capabilities
-1. Have all of the HAL layers by default (in contrast to CubeIDE which will selectively include needed code)
-1. Externally integrate FreeRTOS (as opposed to using the CubeMX middleware)
+1. [Done] Have all of the HAL layers by default (in contrast to CubeIDE which will selectively include needed code)
+1. [Done] Externally integrate FreeRTOS (as opposed to using the CubeMX middleware)
 1. ~~Maintain compatibility with auto-generated code from CubeMX~~
     - CubeMX appears to blow away unexpected source files and the cmake source also needed to be manually edited
     - Changes will need to be manually integrated if CubeMX is needed in the future
-1. Flash and execute this on the NUCLEO-N6 development board
+1. [Done] Flash and execute this on the NUCLEO-N6 development board
+
 Optional:
 1. Integrate FreeRTOS Networking
     - Needs base RMII capabilities from CubeMX (unless FreeRTOS handles it)
