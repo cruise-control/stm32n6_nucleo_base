@@ -21,7 +21,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "FreeRTOS.h"
+#include "FreeRTOSConfig.h"
+#include "task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,7 +46,8 @@
 COM_InitTypeDef BspCOMInit;
 
 /* USER CODE BEGIN PV */
-
+static StaticTask_t main_thread;
+static StackType_t main_thread_stack[configMINIMAL_STACK_SIZE];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -57,6 +60,48 @@ static void MX_ICACHE_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static void main_thread_fct(void *arg);
+
+/* This is defined in port.c */
+void vPortSetupTimerInterrupt(void);
+
+static int main_freertos()
+{
+  TaskHandle_t hdl;
+
+  hdl = xTaskCreateStatic(main_thread_fct, "main", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1,
+                          main_thread_stack, &main_thread);
+  assert(hdl != NULL);
+
+  vTaskStartScheduler();
+  assert(0);
+
+  return -1;
+}
+
+static void main_thread_fct(void *arg)
+{
+  uint32_t preemptPriority;
+  uint32_t subPriority;
+  IRQn_Type i;
+
+  /* Copy SysTick_IRQn priority set by RTOS and use it as default priorities for IRQs. We are now sure that all irqs
+   * have default priority below or equal to configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY.
+   */
+  HAL_NVIC_GetPriority(SysTick_IRQn, HAL_NVIC_GetPriorityGrouping(), &preemptPriority, &subPriority);
+  for (i = PVD_PVM_IRQn; i <= LTDC_UP_ERR_IRQn; i++)
+    HAL_NVIC_SetPriority(i, preemptPriority, subPriority);
+
+  /* Call SystemClock_Config() after vTaskStartScheduler() since it call HAL_Delay() which call vTaskDelay(). Drawback
+   * is that we must call vPortSetupTimerInterrupt() since SystemCoreClock value has been modified by SystemClock_Config()
+   */
+  SystemClock_Config();
+  vPortSetupTimerInterrupt();
+
+  // CONSOLE_Config();
+
+  vTaskDelete(NULL);
+}
 
 /* USER CODE END 0 */
 
@@ -113,6 +158,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  main_freertos();
   while (1)
   {
 
