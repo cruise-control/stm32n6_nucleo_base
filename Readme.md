@@ -47,3 +47,15 @@ This processor has 4 execution contexts. In the typical CubeIDE, each one has it
 1. External Memory 
     - Program code is flashed onto external memory
     - During execution, code is loaded directly from external memory and executed (no additional RAM usage)
+
+## Instructions to Flash and Single Step Debug
+- Create an empty CubeIDE workspace folder
+- Open the CubeIDE in the empty workspace
+- Import an STM CMake project with existing sources
+- Give the project a name and select the root directory of this project
+- Choose the STM32N657X0 gcc build target
+- Navigate to `FSBL/build` and select the CubeMX_FSBL.elf file
+- Right-click and create a new debug target
+  - Ensure that auto-build is not enabled (this project is only to flash / debug the code, not build it)
+- Flash and execute the code
+- (Optionally) create a path mapping between `/workspace/<project_folder>` and `<host_project_folder>` to get single-step capability through the code
