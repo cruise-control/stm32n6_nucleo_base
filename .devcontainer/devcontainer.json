@@ -1,0 +1,49 @@
+{
+	"name": "STM32",
+	"runArgs": [
+		"--cap-add=SYS_PTRACE",
+		"--security-opt",
+		"seccomp=unconfined",
+		"--init",
+		"--gpus=all",
+		"--net=host"
+	],
+	"privileged": true,
+	"build": {
+		"context": "..",
+		"dockerfile": "Dockerfile"
+	},
+	"containerEnv": {
+		"DISPLAY": "${env:DISPLAY}",
+		"WORKSPACE": "${containerWorkspaceFolder}",
+		"HOST_DATA_DIR": "${localEnv:DATA_DIR}"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"dan-c-underwood.arm",
+				"jeff-hykin.better-cpp-syntax",
+				"ms-vscode.cpptools",
+				"akiramiyakoda.cppincludeguard",
+				"xaver.clang-format",
+				"twxs.cmake",
+				"ms-vscode.cmake-tools",
+				"adpyke.codesnap",
+				"mcu-debug.debug-tracker-vscode",
+				"marus25.cortex-debug",
+				"ms-vscode-remote.remote-containers",
+				"ms-azuretools.vscode-docker",
+				"cschlosser.doxdocgen",
+				"mhutchie.git-graph",
+				"donjayamanne.githistory",
+				"eamodio.gitlens",
+				"zixuanwang.linkerscript",
+				"bierner.markdown-preview-github-styles",
+				"mcu-debug.memory-view",
+				"mcu-debug.rtos-views",
+				"albert.tabout",
+				"ms-vscode-remote.remote-wsl",
+			]
+		}
+	}
+}

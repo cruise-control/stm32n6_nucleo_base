@@ -1,0 +1,9 @@
+services:
+  stm32-builder:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      # target: dev
+    # command: ls -al
+    # tty: true           # <-- This option
+    command: tail -f /dev/null

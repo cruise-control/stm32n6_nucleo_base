@@ -1,0 +1,16 @@
+build/CMakeFiles/
+.ninja_log
+.ninja_deps
+*CMakeCache.txt
+FSBL/src/CubeMX_FSBL-stamp/*
+FSBL/build/
+AppliSecure/build/
+AppliNonSecure/build/
+FSBL/tmp/
+build/
+*.out
+*.bin
+*.map
+*.a
+*.o
+*.elf
