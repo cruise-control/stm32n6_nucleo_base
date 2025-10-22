@@ -24,6 +24,7 @@
 #include "FreeRTOS.h"
 #include "FreeRTOSConfig.h"
 #include "task.h"
+#include "Dummy.hpp"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -74,6 +75,8 @@ static int main_freertos()
   hdl = xTaskCreateStatic(main_thread_fct, "main", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1,
                           main_thread_stack, &main_thread);
   assert(hdl != NULL);
+
+  dummy_func();
 
   vTaskStartScheduler();
   assert(0);
@@ -171,6 +174,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   main_freertos();
+
   while (1)
   {
 

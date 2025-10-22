@@ -74,17 +74,23 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/FreeRTOS/ build/FreeRTOS)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Modules/DummyApp/ build/module/dummyapp)
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
     ${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/FreeRTOS/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Modules/DummyApp/
 )
 
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     freertos_kernel
+    dummy_app 
 )
+
+# Add the high-level compile definitions to this target
+target_compile_definitions(dummy_app PRIVATE ${MX_Defines_Syms})
 
 # Remove wrong libob.a library dependency when using cpp files
 list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
