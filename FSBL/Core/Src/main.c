@@ -69,6 +69,8 @@ static int main_freertos()
 {
   TaskHandle_t hdl;
 
+  printf("Creating Main FreeRTOS Task\n");
+
   hdl = xTaskCreateStatic(main_thread_fct, "main", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1,
                           main_thread_stack, &main_thread);
   assert(hdl != NULL);
@@ -85,6 +87,7 @@ static void main_thread_fct(void *arg)
   uint32_t subPriority;
   IRQn_Type i;
 
+  printf("Entering Main FreeRTOS Thread\n");
   /* Copy SysTick_IRQn priority set by RTOS and use it as default priorities for IRQs. We are now sure that all irqs
    * have default priority below or equal to configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY.
    */
@@ -99,6 +102,8 @@ static void main_thread_fct(void *arg)
   vPortSetupTimerInterrupt();
 
   // CONSOLE_Config();
+
+  printf("Exiting Main FreeRTOS Thread\n");
 
   vTaskDelete(NULL);
 }
