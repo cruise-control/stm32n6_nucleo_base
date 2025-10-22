@@ -24,7 +24,8 @@ Which will build all three projects.
 1. [✅] Create a cmake project that can build for the STM32N6 from command line and within vscode
     - This is to allow for easier development and inclusion of libraries without being limited by the Eclipse CDT capabilities
 1. [✅] Have all of the HAL layers by default (in contrast to CubeIDE which will selectively include needed code)
-1. [✅] Externally integrate FreeRTOS (as opposed to using the CubeMX middleware)
+1. [✅] Externally integrate FreeRTOS (as opposed to using the CubeMX derived middleware)
+    - The FreeRTOS build used in this project was copied from an N6 UVC People Detector example project
 1. [❌] ~~Maintain compatibility with auto-generated code from CubeMX~~
     - CubeMX appears to blow away unexpected source files and the cmake source also needed to be manually edited
     - Changes will need to be manually integrated if CubeMX is needed in the future
