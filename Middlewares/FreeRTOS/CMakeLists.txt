@@ -12,7 +12,6 @@ set(FreeRTOS_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/tasks.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Source/timers.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Src/freertos_libc.c
-    # $(CMAKE_CURRENT_SOURCE_DIR)/Source/portable/IAR/ARM_CM55_NTZ/non_secure/portasm.s # Needed?
 )
 
 add_library(freertos_kernel ${FreeRTOS_Src})
