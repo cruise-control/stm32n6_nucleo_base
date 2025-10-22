@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "freertos.h": "c",
+        "cmsis_compiler.h": "c"
+    }
+}
