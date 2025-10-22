@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "freertos.h": "c",
-        "cmsis_compiler.h": "c"
+        "cmsis_compiler.h": "c",
+        "main.h": "c",
+        "stm32n6xx_hal_conf.h": "c",
+        "stm32n655xx.h": "c",
+        "cstdint": "cpp"
     }
 }
