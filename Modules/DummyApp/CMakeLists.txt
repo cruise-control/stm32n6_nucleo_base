@@ -26,6 +26,7 @@ set(MX_Include_Dirs
   ${CMAKE_ROOT_DIR}/Middlewares/FreeRTOS/Source/portable/GCC/ARM_CM55_NTZ/non_secure
   ${CMAKE_ROOT_DIR}/Middlewares/FreeRTOS/Source/include
   ${CMAKE_ROOT_DIR}/Middlewares/FreeRTOS/Source/include
+  ${CMAKE_ROOT_DIR}/Lib/etl/include
 )
 
 target_include_directories(

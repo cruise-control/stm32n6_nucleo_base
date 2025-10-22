@@ -4,6 +4,7 @@
 #include "task.h"
 #include "stm32n6xx_hal.h"
 #include "stm32n6xx_nucleo.h"
+#include "etl/array.h"
 
 static StaticTask_t main_thread;
 static StackType_t main_thread_stack[configMINIMAL_STACK_SIZE];
@@ -12,8 +13,13 @@ static void main_thread_fct(void *arg)
 {
   TickType_t last_tick = xTaskGetTickCount();
   TickType_t xFrequency = 200;
+  etl::array<uint8_t,20> arr = {};
 
   printf("Entering Dummy FreeRTOS Thread\n");
+  for (auto &&i : arr)
+    {
+      printf("%d", i);
+    }
 
   while (1)
   {

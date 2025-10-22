@@ -11,6 +11,8 @@ cmake_minimum_required(VERSION 3.22)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
+set(CMAKE_CXX_STANDARD 26)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Define the build type
 if(NOT CMAKE_BUILD_TYPE)
@@ -75,6 +77,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Middlewares/FreeRTOS/ build/FreeRTOS)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Modules/DummyApp/ build/module/dummyapp)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Lib/etl build/lib/etl)
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -86,7 +89,8 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     freertos_kernel
-    dummy_app 
+    dummy_app
+    etl::etl
 )
 
 # Add the high-level compile definitions to this target
