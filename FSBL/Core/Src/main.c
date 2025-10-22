@@ -86,6 +86,8 @@ static void main_thread_fct(void *arg)
   uint32_t preemptPriority;
   uint32_t subPriority;
   IRQn_Type i;
+  TickType_t last_tick = xTaskGetTickCount();
+  TickType_t xFrequency = 100;
 
   printf("Entering Main FreeRTOS Thread\n");
   /* Copy SysTick_IRQn priority set by RTOS and use it as default priorities for IRQs. We are now sure that all irqs
@@ -100,6 +102,11 @@ static void main_thread_fct(void *arg)
    */
   SystemClock_Config();
   vPortSetupTimerInterrupt();
+
+  while(1){
+    BSP_LED_Toggle(LED_RED);
+    xTaskDelayUntil(&last_tick, xFrequency);
+  }
 
   // CONSOLE_Config();
 
